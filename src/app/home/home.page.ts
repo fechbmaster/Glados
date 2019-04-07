@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {AlertController, NavController} from '@ionic/angular';
-import {ActivatedRoute, Router} from '@angular/router';
+import {GladosService} from '../glados.service';
 
 @Component({
   selector: 'app-home',
@@ -13,21 +13,13 @@ export class HomePage {
 
   private weapon_spint_code = 4326;
   private weapon_spint = false;
-  private weapon_locked = false;
 
   constructor(private alertController: AlertController,
               private nav: NavController,
-              private route: ActivatedRoute,
-              private router: Router) {
+              private glados: GladosService) {
     if (this.debug) {
       this.weapon_spint = true;
     }
-    this.route.queryParams.subscribe(params => {
-      if (params && params.special) {
-        this.weapon_locked = JSON.parse(params.special);
-        console.log(this.weapon_locked);
-      }
-    });
 
   }
 
@@ -67,6 +59,17 @@ export class HomePage {
       console.log('Weapon spint is free now.');
       message = 'Sie können sich über das PDA mit dem Waffenschrank verbinden.';
     } else {
+      const failAlert = await this.alertController.create({
+        header: 'Code nicht erkannt.',
+        buttons: [
+          {
+            text: 'OK',
+            role: 'cancel'
+          }
+        ]
+      });
+
+      await failAlert.present();
       return;
     }
 

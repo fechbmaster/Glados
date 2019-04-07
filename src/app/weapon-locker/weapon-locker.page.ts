@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AlertController, LoadingController, NavController} from '@ionic/angular';
 import {NavigationExtras} from '@angular/router';
+import {GladosService} from '../glados.service';
 
 @Component({
   selector: 'app-weapon-locker',
@@ -11,10 +12,13 @@ export class WeaponLockerPage implements OnInit {
 
   private showInfo = false;
   private spintCode = '042';
+  private trys = 2;
+  private triedTimes = 0;
 
   constructor(public alertController: AlertController,
               public loadingController: LoadingController,
-              public nav: NavController) {
+              public nav: NavController,
+              public glados: GladosService) {
   }
 
   async ngOnInit() {
@@ -98,13 +102,30 @@ export class WeaponLockerPage implements OnInit {
 
   private async checkCode(code: number) {
     console.log('Entered code: ', code);
-    let message = 'Sie haben einen Zugang freigeschalten.';
     if (code == parseInt(this.spintCode, 10)) {
       this.haveANiceDay();
       console.log('Weapon spint is free now.');
-      message = 'Sie können sich über das PDA mit dem Waffenschrank verbinden.';
     } else {
-      return;
+      this.triedTimes++;
+      const failMessage = this.trys - this.triedTimes + ' Versuche verbleibend.';
+      const alert = await this.alertController.create({
+        header: 'Code fehlerhaft.',
+        message: failMessage,
+        buttons: [
+          {
+            text: 'Verlassen.',
+            role: 'cancel',
+            handler: async () => {
+              if (this.triedTimes == this.trys) {
+                this.glados.weapon_spint_locked = true;
+                await this.nav.navigateBack('/home');
+              }
+            }
+          }
+        ]
+      });
+
+      await alert.present();
     }
   }
 
@@ -123,6 +144,7 @@ export class WeaponLockerPage implements OnInit {
           text: 'Verlassen.',
           role: 'cancel',
           handler: async () => {
+            this.glados.weapon_spint_locked = true;
             await this.nav.navigateBack('/home');
           }
         }
