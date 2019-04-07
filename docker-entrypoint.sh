@@ -2,7 +2,7 @@
 set -e
 
 if [ "$1" = 'serve' ]; then
-    echo 'y' |ionic serve
+    echo 'y' | ionic serve
 fi
 if [ "$1" = 'run' ]; then
     adb devices && \

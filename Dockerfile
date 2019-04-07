@@ -58,7 +58,7 @@ RUN wget https://services.gradle.org/distributions/gradle-"$GRADLE_VERSION"-bin.
 ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools:/opt/tools:/opt/gradle/gradle-"$GRADLE_VERSION"/bin
 
 # Install Android SDK
-RUN echo 'y' | /opt/android-sdk-linux/tools/android update sdk -u -a -t platform-tools,build-tools-27.0.3,android-27,build-tools-25.0.3,android-25,extra-android-support,extra-google-m2repository,extra-android-m2repository
+RUN echo 'y' | /opt/android-sdk-linux/tools/android update sdk -u -a -t platform-tools,build-tools-28.0.6,android-28,build-tools-27.0.3,android-27,build-tools-25.0.3,android-25,extra-android-support,extra-google-m2repository,extra-android-m2repository
 RUN cordova telemetry off
 
 WORKDIR Sources
