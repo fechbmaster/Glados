@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home" text="Zurück"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Waffenschrank</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="background-image: url('../../assets/img/weapon-locker.png')" class="locker">
+  <ion-list *ngIf="showInfo">
+    <ion-header>Ausgelesene Informationen:</ion-header>
+    <ion-item>
+      <ion-label>1.Info: 682 - Eine Ziffer ist korrekt und am richtigen Platz. </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>2.Info: 614 - Eine Ziffer ist korrekt, aber am falschen Platz.</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>3.Info: 206 - Zwei Ziffern sind korrekt, aber beide am falsch platziert.</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>4.Info: 738 - Keine Ziffer ist korrekt.</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>5.Info: 780 - Eine Ziffer ist korrekt, aber am falschen Platz.</ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-button *ngIf="showInfo" expand="block" color="danger" fill="solid" (click)="insertCode()">Zugangscode eingeben</ion-button>
+
+</ion-content>

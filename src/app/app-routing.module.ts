@@ -5,6 +5,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', loadChildren: './home/home.module#HomePageModule' },
   { path: 'shuttle-map', loadChildren: './shuttle-map/shuttle-map.module#ShuttleMapPageModule' },
+  { path: 'weapon-locker', loadChildren: './weapon-locker/weapon-locker.module#WeaponLockerPageModule', data: {locked: false} },
 ];
 
 @NgModule({

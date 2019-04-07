@@ -17,7 +17,8 @@
     "docker:rebuild:modules": "docker run -ti --rm -v ${PWD}:/Sources:rw glados/ionic rebuild-modules",
     "linux:docker:run:android": "docker run -ti --rm --privileged -v /dev/bus/usb:/dev/bus/usb -v ${PWD}:/Sources:rw glados/ionic run",
     "linux:docker:run:android:clean": "docker run -ti --rm --privileged -v /dev/bus/usb:/dev/bus/usb -v ${PWD}:/Sources:rw glados/ionic clean-run",
-    "linux:chown:user": "sudo chown -cRf $USER node_modules platforms plugins package-lock.json yarn.lock"
+    "linux:chown:user": "sudo chown -cRf $USER node_modules platforms plugins package-lock.json yarn.lock",
+    "docker:kill:all": "docker kill $(docker ps -q)"
   },
   "private": true,
   "dependencies": {
