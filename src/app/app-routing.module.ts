@@ -8,7 +8,8 @@ const routes: Routes = [
   { path: 'weapon-locker', loadChildren: './weapon-locker/weapon-locker.module#WeaponLockerPageModule', data: {locked: false} },
   { path: 'captains-log-book', loadChildren: './captains-log-book/captains-log-book.module#CaptainsLogBookPageModule' },
   { path: 'planet-information', loadChildren: './planet-information/planet-information.module#PlanetInformationPageModule' },
-  { path: 'surrounding-information', loadChildren: './surrounding-information/surrounding-information.module#SurroundingInformationPageModule' }
+  { path: 'surrounding-information', loadChildren: './surrounding-information/surrounding-information.module#SurroundingInformationPageModule' },
+  { path: 'science-map', loadChildren: './science-map/science-map.module#ScienceMapPageModule' }
 ];
 
 @NgModule({

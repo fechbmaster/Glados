@@ -18,7 +18,8 @@ export class HomePage {
     ['weapon-locker', ['Auf Waffenschrank zugreifen', '../../assets/img/weapon-locker.png']],
     ['captains-log-book', ['Logbuch des Captains', '']],
     ['planet-information', ['Notiz des Captains: Informationen über den Planeten ', '']],
-    ['surrounding-information', ['Ergebnisse des Umgebungsscanners ', '../../assets/img/scanner-result.png']]
+    ['surrounding-information', ['Ergebnisse des Umgebungsscanners ', '../../assets/img/scanner-result.png']],
+    ['science-map', ['Karte der Forschungsstation', '../../assets/img/scanner.png']]
   ]);
 
   constructor(private alertController: AlertController,
