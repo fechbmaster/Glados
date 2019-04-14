@@ -9,7 +9,8 @@ const routes: Routes = [
   { path: 'captains-log-book', loadChildren: './captains-log-book/captains-log-book.module#CaptainsLogBookPageModule' },
   { path: 'planet-information', loadChildren: './planet-information/planet-information.module#PlanetInformationPageModule' },
   { path: 'surrounding-information', loadChildren: './surrounding-information/surrounding-information.module#SurroundingInformationPageModule' },
-  { path: 'science-map', loadChildren: './science-map/science-map.module#ScienceMapPageModule' }
+  { path: 'science-map', loadChildren: './science-map/science-map.module#ScienceMapPageModule' },
+  { path: 'science-log', loadChildren: './science-log/science-log.module#ScienceLogPageModule' }
 ];
 
 @NgModule({

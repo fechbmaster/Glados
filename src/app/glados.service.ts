@@ -13,6 +13,7 @@ export class GladosService {
     ['planet-information', new Code(2348, '/planet-information')],
     ['surrounding-information', new Code(6124, '/surrounding-information')],
     ['science-map', new Code(8935, '/science-map')],
+    ['science-log', new Code(1356, '/science-log')]
   ]);
 
   constructor() {

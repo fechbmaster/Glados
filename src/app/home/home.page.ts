@@ -19,7 +19,8 @@ export class HomePage {
     ['captains-log-book', ['Logbuch des Captains', '']],
     ['planet-information', ['Notiz des Captains: Informationen über den Planeten ', '']],
     ['surrounding-information', ['Ergebnisse des Umgebungsscanners ', '../../assets/img/scanner-result.png']],
-    ['science-map', ['Karte der Forschungsstation', '../../assets/img/scanner.png']]
+    ['science-map', ['Karte der Forschungsstation', '../../assets/img/scanner.png']],
+    ['science-log', ['Technischer Eintrag (Verfasser unbekannt)', '']]
   ]);
 
   constructor(private alertController: AlertController,
