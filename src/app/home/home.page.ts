@@ -16,7 +16,8 @@ export class HomePage {
   private codeAttributes = new Map<string, [string, string]>([
     ['shuttle-map', ['Karte des Space-Shuttles "Ionic III"', '../../assets/img/space_shuttle_map.png']],
     ['weapon-locker', ['Auf Waffenschrank zugreifen', '../../assets/img/weapon-locker.png']],
-    ['captains-log-book', ['Logbuch des Captains', '']]
+    ['captains-log-book', ['Logbuch des Captains', '']],
+    ['planet-information', ['Notiz des Captains: Informationen über den Planeten ', '']]
   ]);
 
   constructor(private alertController: AlertController,
