@@ -10,7 +10,8 @@ const routes: Routes = [
   { path: 'planet-information', loadChildren: './planet-information/planet-information.module#PlanetInformationPageModule' },
   { path: 'surrounding-information', loadChildren: './surrounding-information/surrounding-information.module#SurroundingInformationPageModule' },
   { path: 'science-map', loadChildren: './science-map/science-map.module#ScienceMapPageModule' },
-  { path: 'science-log', loadChildren: './science-log/science-log.module#ScienceLogPageModule' }
+  { path: 'science-log', loadChildren: './science-log/science-log.module#ScienceLogPageModule' },
+  { path: 'map-page', loadChildren: './map-page/map-page.module#MapPagePageModule' }
 ];
 
 @NgModule({
