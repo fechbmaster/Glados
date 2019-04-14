@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {AlertController, NavController} from '@ionic/angular';
 import {GladosService} from '../glados.service';
+import {Code} from '../models/Code';
 
 @Component({
   selector: 'app-home',
@@ -10,17 +11,37 @@ import {GladosService} from '../glados.service';
 export class HomePage {
 
   private debug = true;
+  private codes: Map<string, Code>;
 
-  private weapon_spint_code = 4326;
-  private weapon_spint = false;
+  private codeAttributes = new Map<string, [string, string]>([
+    ['shuttle-map', ['Karte des Space-Shuttles "Ionic III"', '../../assets/img/space_shuttle_map.png']],
+    ['weapon-locker', ['Auf Waffenschrank zugreifen', '../../assets/img/weapon-locker.png']],
+    ['captains-log-book', ['Logbuch des Captains', '']]
+  ]);
 
   constructor(private alertController: AlertController,
               private nav: NavController,
               private glados: GladosService) {
+    this.codes = glados.codes;
     if (this.debug) {
-      this.weapon_spint = true;
+      this.codes.forEach((value: Code) => {
+        value.unlocked = true;
+      });
     }
+    this.extendCodesWithAttributes();
 
+  }
+
+  private extendCodesWithAttributes() {
+    this.codes.forEach((value: Code, key: string) => {
+      const attributes: [string, string] = this.codeAttributes.get(key);
+      if (attributes) {
+        value.label = attributes[0];
+        if (attributes[1] != '') {
+          value.imageUrl = attributes[1];
+        }
+      }
+    });
   }
 
   private async insertCode() {
@@ -53,29 +74,26 @@ export class HomePage {
 
   private async checkCode(code: number) {
     console.log('Entered code: ', code);
-    let message = 'Sie haben einen Zugang freigeschalten.';
-    if (code == this.weapon_spint_code) {
-      this.weapon_spint = true;
-      console.log('Weapon spint is free now.');
-      message = 'Sie können sich über das PDA mit dem Waffenschrank verbinden.';
-    } else {
-      const failAlert = await this.alertController.create({
-        header: 'Code nicht erkannt.',
-        buttons: [
-          {
-            text: 'OK',
-            role: 'cancel'
-          }
-        ]
-      });
-
-      await failAlert.present();
-      return;
-    }
-
-    const alert = await this.alertController.create({
-      header: 'Zugang freigeschalten.',
-      message: message,
+    this.codes.forEach(async (value: Code) => {
+      if (code == value.code) {
+        console.log('Locked free: ', value);
+        value.unlocked = true;
+        const alert = await this.alertController.create({
+          header: 'Zugang freigeschaltet.',
+          message: value.message,
+          buttons: [
+            {
+              text: 'OK',
+              role: 'cancel'
+            }
+          ]
+        });
+        await alert.present();
+        return;
+      }
+    });
+    const failAlert = await this.alertController.create({
+      header: 'Code nicht erkannt.',
       buttons: [
         {
           text: 'OK',
@@ -84,14 +102,10 @@ export class HomePage {
       ]
     });
 
-    await alert.present();
+    await failAlert.present();
   }
 
-  private goToSpaceShuttleMap() {
-    this.nav.navigateForward('/shuttle-map');
-  }
-
-  private goToWeaponLocker() {
-    this.nav.navigateForward('/weapon-locker');
+  private goToPage(code: Code) {
+    this.nav.navigateForward(code.url);
   }
 }

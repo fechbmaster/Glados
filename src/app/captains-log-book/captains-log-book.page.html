@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home" text="Zurück"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Logbuch des Captains</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-list *ngFor="let entry of entries | keyvalue">
+    <ion-item (click)="openLog(entry)">
+      <ion-label>{{entry.key}}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

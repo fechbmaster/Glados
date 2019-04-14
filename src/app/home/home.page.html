@@ -7,19 +7,12 @@
 </ion-header>
 
 <ion-content>
-    <ion-list>
-        <ion-item (click)="goToSpaceShuttleMap()">
+    <ion-list *ngFor="let code of codes | keyvalue">
+        <ion-item [class.disabled]="code.value.disabled" *ngIf="code.value.unlocked" (click)="goToPage(code.value)">
             <ion-avatar slot="start">
-                <img src="../../assets/img/space_shuttle_map.png">
+                <img [src]="code.value.imageUrl">
             </ion-avatar>
-            <ion-label>Karte Space Shuttle</ion-label>
-            <ion-icon name="arrow-forward" slot="end"></ion-icon>
-        </ion-item>
-        <ion-item [class.disabled]="glados.weapon_spint_locked" *ngIf="weapon_spint" (click)="goToWeaponLocker()">
-            <ion-avatar slot="start">
-                <img src="../../assets/img/weapon-locker.png">
-            </ion-avatar>
-            <ion-label>Mit Waffenschrank verbinden.</ion-label>
+            <ion-label>{{code.value.label}}</ion-label>
             <ion-icon name="arrow-forward" slot="end"></ion-icon>
         </ion-item>
     </ion-list>

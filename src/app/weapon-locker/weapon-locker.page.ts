@@ -117,7 +117,9 @@ export class WeaponLockerPage implements OnInit {
             role: 'cancel',
             handler: async () => {
               if (this.triedTimes == this.trys) {
-                this.glados.weapon_spint_locked = true;
+                const locker = this.glados.codes.get('weapon-locker');
+                locker.disabled = true;
+                locker.label = locker.label + ' [gesperrt]';
                 await this.nav.navigateBack('/home');
               }
             }
@@ -144,7 +146,9 @@ export class WeaponLockerPage implements OnInit {
           text: 'Verlassen.',
           role: 'cancel',
           handler: async () => {
-            this.glados.weapon_spint_locked = true;
+            const locker = this.glados.codes.get('weapon-locker');
+            locker.disabled = true;
+            locker.label = locker.label + ' [bereits freigeschalten]';
             await this.nav.navigateBack('/home');
           }
         }

@@ -1,11 +1,16 @@
 import {Injectable} from '@angular/core';
+import {Code} from './models/Code';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GladosService {
 
-  public weapon_spint_locked = false;
+  public codes = new Map<string, Code>([
+    ['shuttle-map', new Code(1111, '/shuttle-map')],
+    ['weapon-locker', new Code(4368, '/weapon-locker', 'Sie können sich über das PDA mit dem Waffenschrank verbinden.')],
+    ['captains-log-book', new Code(9112, '/captains-log-book')]
+  ]);
 
   constructor() {
   }
