@@ -10,7 +10,7 @@ import {Code} from '../models/Code';
 })
 export class HomePage {
 
-  private debug = true;
+  private debug = false;
   private codes: Map<string, Code>;
 
   private defaultMapCode = 2468;
@@ -39,7 +39,7 @@ export class HomePage {
       });
     }
     this.extendCodesWithAttributes();
-
+    this.unlockDefaults();
   }
 
   private extendCodesWithAttributes() {
@@ -50,6 +50,14 @@ export class HomePage {
         if (attributes[1] != '') {
           value.imageUrl = attributes[1];
         }
+      }
+    });
+  }
+
+  private unlockDefaults() {
+    this.codes.forEach((value: Code) => {
+      if (value.code == 1111) {
+        value.unlocked = true;
       }
     });
   }
@@ -79,7 +87,7 @@ export class HomePage {
       ]
     });
 
-    await alert.present();
+    alert.present();
   }
 
   private async checkCode(code: number) {
@@ -98,41 +106,31 @@ export class HomePage {
             }
           ]
         });
-        await alert.present();
+        alert.present();
         return;
       }
     });
     if (code == this.defaultMapCode) {
       this.glados.setDefaultMap();
-      await this.showMapChangedAlert();
+      this.showMapChangedAlert();
       return;
     }
     if (code == this.scienceMapCode) {
       this.glados.setScienceMap();
-      await this.showMapChangedAlert();
+      this.showMapChangedAlert();
       return;
     }
     if (code == this.shuttleMapCode) {
       this.glados.setShuttleMap();
-      await this.showMapChangedAlert();
+      this.showMapChangedAlert();
       return;
     }
     if (code == this.completeMapCode) {
       this.glados.setCompleteMap();
-      await this.showMapChangedAlert();
+      this.showMapChangedAlert();
       return;
     }
-    const failAlert = await this.alertController.create({
-      header: 'Code nicht erkannt.',
-      buttons: [
-        {
-          text: 'OK',
-          role: 'cancel'
-        }
-      ]
-    });
 
-    await failAlert.present();
   }
 
   private async showMapChangedAlert() {

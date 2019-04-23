@@ -1,5 +1,5 @@
 {
-  "name": "Glados",
+  "name": "IonicPDA",
   "version": "0.0.1",
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
@@ -17,7 +17,7 @@
     "docker:rebuild:modules": "docker run -ti --rm -v ${PWD}:/Sources:rw glados/ionic rebuild-modules",
     "linux:docker:run:android": "docker run -ti --rm --privileged -v /dev/bus/usb:/dev/bus/usb -v ${PWD}:/Sources:rw glados/ionic run",
     "linux:docker:run:android:clean": "docker run -ti --rm --privileged -v /dev/bus/usb:/dev/bus/usb -v ${PWD}:/Sources:rw glados/ionic clean-run",
-    "linux:chown:user": "sudo chown -cRf $USER node_modules platforms plugins package-lock.json yarn.lock",
+    "linux:chown:user": "sudo chown -cRf $USER node_modules platforms plugins package-lock.json yarn.lock config.xml",
     "docker:kill:all": "docker kill $(docker ps -q)"
   },
   "private": true,
